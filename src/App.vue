@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    Hello
     <router-view></router-view>
   </div>
 </template>
@@ -23,6 +22,6 @@ body{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 </style>
