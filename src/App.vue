@@ -20,7 +20,6 @@ body{
   font-family: Verdana, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #000;
   margin-top: 10px;
 }
