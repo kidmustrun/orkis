@@ -7,19 +7,17 @@ const requestHeaders = {
   "X-Requested-With": "XMLHttpRequest",
 };
 export const loginUser = (user) => {
-  console.log(user);
-  axios
-    .post(
-      `${URL_BASE}/login`,
-      user,
-      requestHeaders
-    )
-    .then((response) => {
-      localStorage.setItem("token", response.headers.authorization);
-      console.log(localStorage.getItem("token"));
-    })
-    .catch(function (error) {
-      localStorage.removeItem("token");
-      console.error("Something bad happened", error);
-    });
-};
+  let req = axios
+      .post(`${URL_BASE}/login`, user, requestHeaders)
+      req
+      .then((response) => {
+        localStorage.setItem("token", response.headers.authorization);
+        console.log(localStorage.getItem("token"));
+        return response;
+      })
+      .catch(function (error) {
+        localStorage.removeItem("token");
+        console.error("Something bad happened", error);
+        return error;
+      });
+  }

@@ -8,6 +8,7 @@
           type="email"
           class="form-control"
           id="email"
+          v-model="email"
           placeholder="name@example.com"
         />
         <label for="email">Email</label>
@@ -17,6 +18,7 @@
           type="password"
           class="form-control"
           id="password"
+          v-model="password"
           placeholder="Password"
         />
         <label for="password">Пароль</label>
@@ -47,15 +49,15 @@ export default {
     return {
       email: "",
       password: "",
-      token: null,
     };
+  },
+  computed: {
+    token: localStorage.getItem("token"),
   },
   methods: {
     sendUser() {
-      this.email = document.getElementById('email').value;
-      this.password = document.getElementById('password').value;
-      loginUser({'email': this.email, 'password': this.password});
-      this.$router.push('/clients');
+      loginUser({ email: this.email, password: this.password });
+      if (this.token) this.$router.push("/clients");
     },
   },
 };
