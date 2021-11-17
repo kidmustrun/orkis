@@ -1,32 +1,64 @@
 <template>
-<div class="form-signin">
-<form>
-    <h1 class="h3 mb-3 fw-normal">Войти в систему</h1>
+  <div class="form-signin">
+    <form>
+      <h1 class="h3 mb-3 fw-normal">Войти в систему</h1>
 
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Email</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Пароль</label>
-    </div>
+      <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="name@example.com"
+        />
+        <label for="email">Email</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+        />
+        <label for="password">Пароль</label>
+      </div>
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Запомнить меня
-      </label>
-    </div>
-    <button class="w-100 btn btn-submit btn-lg btn-primary" type="submit">Войти</button>
-  </form>
-  <router-link to="/signup">Зарегистрироваться</router-link>
-</div>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me" /> Запомнить меня
+        </label>
+      </div>
+      <button
+        class="w-100 btn btn-submit btn-lg btn-primary"
+        @click="sendUser()"
+      >
+        Войти
+      </button>
+    </form>
+    <router-link to="/signup">Зарегистрироваться</router-link>
+  </div>
 </template>
 
 <script>
+import { loginUser } from "../api/api.js";
+
 export default {
-  name: 'SignIn',
-}
+  name: "SignIn",
+  data() {
+    return {
+      email: "",
+      password: "",
+      token: null,
+    };
+  },
+  methods: {
+    sendUser() {
+      this.email = document.getElementById('email').value;
+      this.password = document.getElementById('password').value;
+      loginUser({'email': this.email, 'password': this.password});
+      this.$router.push('/clients');
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
