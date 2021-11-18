@@ -6,6 +6,21 @@ const requestHeaders = {
   "Content-Type": "application/json",
   "X-Requested-With": "XMLHttpRequest",
 };
+export const registerUser = (user) =>
+  new Promise((resolve, reject) => {
+    console.log(`${URL_BASE}/register`, user, requestHeaders);
+    axios
+      .post(`${URL_BASE}/register`, user, requestHeaders)
+      .then(function (resp) {
+        const token = resp.headers.authorization;
+        localStorage.setItem("token", token);
+        resolve(resp);
+      })
+      .catch(function (err) {
+        localStorage.removeItem("token");
+        reject(err);
+      });
+  });
 export const loginUser = (user) =>
   new Promise((resolve, reject) => {
     console.log(`${URL_BASE}/login`, user, requestHeaders);
