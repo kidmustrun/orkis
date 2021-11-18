@@ -21,3 +21,6 @@ export const loginUser = (user) =>
         reject(err);
       });
   });
+export const logoutUser = () => {
+  localStorage.removeItem("token");
+};

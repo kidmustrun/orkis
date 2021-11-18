@@ -1,6 +1,8 @@
 <template>
   <div class="container">
     <h1>Клиенты</h1>
+    <router-link to="/main">На главную</router-link>
+    <hr>
     <ul class="list-group" v-for="client in clients" :key="client.id">
       <li class="list-group-item">Клиент {{ client.name }}</li>
       <router-link :to="clientOpen(client.id)">Редактировать</router-link>

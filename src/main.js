@@ -7,6 +7,7 @@ import Users from "./components/Users";
 import User from "./components/User";
 import Clients from "./components/Clients";
 import Client from "./components/Client";
+import Main from "./components/Main";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -16,8 +17,9 @@ const routes = [
   { path: "/users", component: Users },
   { path: '/users/:id', component: User },
   { path: "/clients", component: Clients },
+  { path: "/main", component: Main },
   { path: "/clients/:id", component: Client },
-  { path: "*", component: SignUp },
+  { path: "*", component: Main },
   
 ];
 
