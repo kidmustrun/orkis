@@ -29,13 +29,14 @@
           <input type="checkbox" value="remember-me" /> Запомнить меня
         </label>
       </div>
-      <button
+      
+    </form>
+    <button
         class="w-100 btn btn-submit btn-lg btn-primary"
         @click="sendUser()"
       >
         Войти
       </button>
-    </form>
     <router-link to="/signup">Зарегистрироваться</router-link>
   </div>
 </template>
@@ -53,8 +54,11 @@ export default {
   },
   methods: {
     sendUser() {
-      loginUser({ email: this.email, password: this.password });
-      // if (localStorage.getItem("token")) this.$router.push("/clients");
+      loginUser({ email: this.email, password: this.password })
+        .then(() => {
+          this.$router.push("/clients");
+        })
+        .catch((error) => console.log(error));
     },
   },
 };
