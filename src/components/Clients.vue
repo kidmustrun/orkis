@@ -9,21 +9,6 @@
 </template>
 
 <script>
-const axios = require("axios").default;
-const URL_BASE = "http://e07e-95-165-9-250.ngrok.io";
-let validation = false;
-if (validation) {
-  axios
-    .get(`${URL_BASE}/api/v1/clients`)
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    });
-}
 export default {
   name: "Clients",
   data: function () {

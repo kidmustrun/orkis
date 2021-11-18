@@ -51,13 +51,10 @@ export default {
       password: "",
     };
   },
-  computed: {
-    token: localStorage.getItem("token"),
-  },
   methods: {
     sendUser() {
       loginUser({ email: this.email, password: this.password });
-      if (this.token) this.$router.push("/clients");
+      // if (localStorage.getItem("token")) this.$router.push("/clients");
     },
   },
 };
