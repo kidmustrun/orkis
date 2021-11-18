@@ -11,25 +11,97 @@ import Main from "./components/Main";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
+const isAuthenticated = () => {
+  if (localStorage.getItem("token")) return true;
+  else false;
+};
 const routes = [
   { path: "/signup", component: SignUp },
-  { path: "/signin", component: SignIn },
-  { path: "/users", component: Users },
-  { path: '/users/:id', component: User },
-  { path: "/clients", component: Clients },
-  { path: "/main", component: Main },
-  { path: "/clients/:id", component: Client },
-  { path: "*", component: Main },
-  
+  {
+    path: "/signin",
+    component: SignIn,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next("/main");
+      } else {
+        next();
+      }
+    },
+  },
+  {
+    path: "/users",
+    component: Users,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/users/:id",
+    component: User,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/clients",
+    component: Clients,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/main",
+    component: Main,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/clients/:id",
+    component: Client,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "*",
+    component: Main,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next("/main");
+      } else {
+        next();
+      }
+    },
+  },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes,
 });
 
 new Vue({
   render: (h) => h(App),
-  router
+  router,
 }).$mount("#app");
-

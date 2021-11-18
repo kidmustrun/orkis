@@ -1,10 +1,13 @@
 <template>
   <div class="container">
     <h1>Главная</h1>
-    <router-link to="/clients">Клиенты</router-link>
-    <router-link to="/users">Сотрудники</router-link>
-    <button @click="logoutClick()">Выйти</button>
+    <ul class="list-group list-group-flush">
+  <li class="list-group-item"><router-link to="/clients">Клиенты</router-link></li>
+  <li class="list-group-item"><router-link to="/users">Сотрудники</router-link></li>
+</ul>
+    <button @click="logoutClick()" class="btn">Выйти</button>
   </div>
+  
 </template>
 
 <script>
