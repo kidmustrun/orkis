@@ -29,14 +29,13 @@
           <input type="checkbox" value="remember-me" /> Запомнить меня
         </label>
       </div>
-      
     </form>
-    <button
-        class="w-100 btn btn-submit btn-lg btn-primary"
-        @click="sendUser()"
-      >
-        Войти
-      </button>
+    <button class="w-100 btn btn-submit btn-lg btn-primary" @click="sendUser()">
+      Войти
+    </button>
+    <div v-if="showMessage" class="mt-2 alert alert-danger">
+      Неправильный пароль или email.
+    </div>
     <router-link to="/signup">Зарегистрироваться</router-link>
   </div>
 </template>
@@ -50,6 +49,7 @@ export default {
     return {
       email: "",
       password: "",
+      showMessage: false,
     };
   },
   methods: {
@@ -57,8 +57,12 @@ export default {
       loginUser({ email: this.email, password: this.password })
         .then(() => {
           this.$router.push("/clients");
+          this.showMessage = false;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          this.showMessage = true;
+        });
     },
   },
 };
