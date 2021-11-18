@@ -26,7 +26,7 @@
 
       <div class="checkbox mb-3">
         <label>
-          <input type="checkbox" value="remember-me" /> Запомнить меня
+          <input v-model="remember" type="checkbox" value="remember-me" /> Запомнить меня
         </label>
       </div>
     </form>
@@ -58,6 +58,7 @@ export default {
     return {
       email: "",
       password: "",
+      remember: false,
       show400: false,
       show503: false,
       loading: false,
@@ -69,7 +70,7 @@ export default {
       this.show400 = false;
       this.show503 = false;
       console.log(this.loading);
-      loginUser({ email: this.email, password: this.password })
+      loginUser({ email: this.email, password: this.password, remember: this.remember })
         .then(() => {
           this.$router.push("/main");
           this.show400 = false;

@@ -56,22 +56,22 @@
         <input
           type="password"
           class="form-control"
-          id="password"
+          id="password2"
           placeholder="Пароль еще раз"
         />
-        <label for="password">Повторите пароль</label>
+        <label for="password2">Повторите пароль</label>
       </div>
       <div class="form-floating">
         <select
           class="form-select"
-          id="floatingSelect"
+          id="orgs"
           aria-label="Floating label select example"
         >
           <option selected value="1">Организация 1</option>
           <option value="2">Организация 2</option>
           <option value="3">Организация 3</option>
         </select>
-        <label for="floatingSelect">Выберите организацию</label>
+        <label for="orgs">Выберите организацию</label>
       </div>
       <div class="form-check form-check-inline mt-2 mb-2">
         <input class="form-check-input" type="radio" name="gender" id="man" />
@@ -84,14 +84,14 @@
       <div class="form-floating mb-3">
         <select
           class="form-select"
-          id="floatingSelect"
+          id="roles"
           aria-label="Floating label select example"
         >
           <option selected value="1">Роль 1</option>
           <option value="2">Роль 2</option>
           <option value="3">Роль 3</option>
         </select>
-        <label for="floatingSelect">Выберите роль</label>
+        <label for="roles">Выберите роль</label>
       </div>
       <button class="w-100 btn btn-submit btn-lg btn-primary" type="submit">
         Зарегистрироваться
