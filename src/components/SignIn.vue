@@ -39,10 +39,10 @@
       <div class="cssload-ball cssload-ball-3"></div>
       <div class="cssload-ball cssload-ball-4"></div>
     </div>
-    <div v-if="show400" class="mt-2 alert alert-danger">
+    <div v-show="show400" class="mt-2 alert alert-danger">
       Неправильный пароль или email.
     </div>
-    <div v-if="show503" class="mt-2 alert alert-danger">
+    <div v-show="show503" class="mt-2 alert alert-danger">
       Что-то пошло не так
     </div>
     <router-link to="/signup">Зарегистрироваться</router-link>

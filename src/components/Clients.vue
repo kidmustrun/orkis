@@ -2,34 +2,40 @@
   <div class="container">
     <h1>Клиенты</h1>
     <router-link to="/main">На главную</router-link>
-    <hr>
+    <hr />
+     <div v-if="loading" class="cssload-spinner">
+      <div class="cssload-ball cssload-ball-1"></div>
+      <div class="cssload-ball cssload-ball-2"></div>
+      <div class="cssload-ball cssload-ball-3"></div>
+      <div class="cssload-ball cssload-ball-4"></div>
+    </div>
+    
     <ul class="list-group" v-for="client in clients" :key="client.id">
-      <li class="list-group-item">Клиент {{ client.name }}</li>
+      <li class="list-group-item">Клиент {{ client.first_name }} {{ client.last_name }}</li>
+      <keep-alive>
       <router-link :to="clientOpen(client.id)">Редактировать</router-link>
+      </keep-alive>
     </ul>
+    
   </div>
 </template>
 
 <script>
+import { getSomething } from "../api/get.js";
 export default {
   name: "Clients",
   data: function () {
     return {
-      clients: [
-        {
-          id: 1,
-          name: "Alexey",
-        },
-        {
-          id: 2,
-          name: "Oleg",
-        },
-        {
-          id: 3,
-          name: "Alexander",
-        },
-      ],
+      clients: [],
+      loading: false
     };
+  },
+  created() {
+    this.loading = true;
+    getSomething('clients').then((resp) => {
+      this.clients = resp.data;
+      this.loading = false;
+    });
   },
   methods: {
     clientOpen: function (id) {
@@ -40,30 +46,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+@import "../assets/scss/downloading.scss";
 </style>

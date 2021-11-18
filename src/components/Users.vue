@@ -3,33 +3,35 @@
     <h1>Сотрудники</h1>
     <router-link to="/main">На главную</router-link>
     <hr>
+    <div v-if="loading" class="cssload-spinner">
+      <div class="cssload-ball cssload-ball-1"></div>
+      <div class="cssload-ball cssload-ball-2"></div>
+      <div class="cssload-ball cssload-ball-3"></div>
+      <div class="cssload-ball cssload-ball-4"></div>
+    </div>
     <ul class="list-group" v-for="user in users" :key="user.id">
-  <li class="list-group-item">Сотрудник {{ user.name }}</li>
+  <li class="list-group-item">Сотрудник {{ user.first_name }} {{ user.last_name }}</li>
   <router-link :to="userOpen(user.id)">Редактировать</router-link>
 </ul>
 </div>
 </template>
 
 <script>
+import { getSomething } from "../api/get"
 export default {
   name: 'Users',
    data: function () {
     return {
-      users: [
-          {
-              id: 1,
-              name: 'Ivan'
-          },
-          {
-              id: 2,
-              name: 'Sergey'
-          },
-          {
-              id: 3,
-              name: 'Tom'
-          },
-      ]
+      users: [],
+      loading: false
     }
+  },
+  created(){
+    this.loading = true;
+getSomething('users').then((resp) => {
+      this.users = resp.data;
+      this.loading = false;
+    });
   },
   methods: {
       userOpen: function(id) {
@@ -40,30 +42,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-.form-signin .checkbox {
-  font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+@import "../assets/scss/downloading.scss";
 </style>
