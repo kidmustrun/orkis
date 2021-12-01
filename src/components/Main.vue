@@ -24,13 +24,12 @@ export default {
   created() {
     getSomething("user").then((response) => {
       this.user = response.data[0];
-      console.log(this.user)
     });
   },
   methods: {
     logoutClick() {
-      console.log("logout...");
       logoutUser();
+      location.reload();
       this.$router.push("/signin");
     },
   },

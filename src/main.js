@@ -8,6 +8,7 @@ import User from "./components/User";
 import Clients from "./components/Clients";
 import Client from "./components/Client";
 import Main from "./components/Main";
+import { getSomething } from "./api/get";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
@@ -15,8 +16,27 @@ const isAuthenticated = () => {
   if (localStorage.getItem("token")) return true;
   else false;
 };
+var admin;
+
+getSomething("user").then((response) => {
+  let user;
+  user = response.data[0];
+
+  if (user.role === "admin") admin = true;
+  else admin = false;
+});
 const routes = [
-  { path: "/add_user", component: AddUser },
+  {
+    path: "/add_user",
+    component: AddUser,
+    beforeEnter(to, from, next) {
+      if (admin) {
+        next();
+      } else {
+        next("/main");
+      }
+    },
+  },
   {
     path: "/signin",
     component: SignIn,

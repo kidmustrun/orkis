@@ -72,6 +72,7 @@ export default {
       loginUser({ email: this.email, password: this.password, remember: this.remember })
         .then(() => {
           this.$router.push("/main");
+          location.reload()
           this.show400 = false;
           this.loading = false;
         })
