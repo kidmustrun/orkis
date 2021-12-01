@@ -45,7 +45,6 @@
     <div v-show="show503" class="mt-2 alert alert-danger">
       Что-то пошло не так
     </div>
-    <router-link to="/signup">Зарегистрироваться</router-link>
   </div>
 </template>
 

@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
 import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
+import AddUser from "./components/AddUser";
 import Users from "./components/Users";
 import User from "./components/User";
 import Clients from "./components/Clients";
@@ -16,7 +16,7 @@ const isAuthenticated = () => {
   else false;
 };
 const routes = [
-  { path: "/signup", component: SignUp },
+  { path: "/add_user", component: AddUser },
   {
     path: "/signin",
     component: SignIn,

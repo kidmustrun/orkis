@@ -1,22 +1,24 @@
 <template>
   <div class="container">
     <h1>Клиенты</h1>
-    <router-link to="/main">На главную</router-link>
+    <router-link to="/main">На главную</router-link><br>
+    <router-link v-if="admin" to="/add_user">Создать пользователя</router-link>
     <hr />
-     <div v-if="loading" class="cssload-spinner">
+    <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
       <div class="cssload-ball cssload-ball-2"></div>
       <div class="cssload-ball cssload-ball-3"></div>
       <div class="cssload-ball cssload-ball-4"></div>
     </div>
-    
+
     <ul class="list-group" v-for="client in clients" :key="client.id">
-      <li class="list-group-item">Клиент {{ client.first_name }} {{ client.last_name }}</li>
+      <li class="list-group-item">
+        Клиент {{ client.first_name }} {{ client.last_name }}
+      </li>
       <keep-alive>
-      <router-link :to="clientOpen(client.id)">Редактировать</router-link>
+        <router-link :to="clientOpen(client.id)">Редактировать</router-link>
       </keep-alive>
     </ul>
-    
   </div>
 </template>
 
@@ -27,14 +29,24 @@ export default {
   data: function () {
     return {
       clients: [],
-      loading: false
+      loading: false,
+      user: {},
     };
+  },
+  computed: {
+    admin: function () {
+      if (this.user.role === "admin") return true;
+      else return false;
+    },
   },
   created() {
     this.loading = true;
-    getSomething('clients').then((resp) => {
+    getSomething("clients").then((resp) => {
       this.clients = resp.data;
       this.loading = false;
+    });
+    getSomething("user").then((response) => {
+      this.user = response.data[0];
     });
   },
   methods: {

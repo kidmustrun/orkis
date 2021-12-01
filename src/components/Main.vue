@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1>Главная</h1>
+    <h2>Привет, {{user.first_name}}</h2>
     <ul class="list-group list-group-flush">
   <li class="list-group-item"><router-link to="/clients">Клиенты</router-link></li>
   <li class="list-group-item"><router-link to="/users">Сотрудники</router-link></li>
@@ -12,8 +13,20 @@
 
 <script>
 import { logoutUser } from "../api/auth.js";
+import { getSomething }from "../api/get.js";
 export default {
   name: "Main",
+  data(){
+    return{
+      user: {}
+    }
+  },
+  created() {
+    getSomething("user").then((response) => {
+      this.user = response.data[0];
+      console.log(this.user)
+    });
+  },
   methods: {
     logoutClick() {
       console.log("logout...");

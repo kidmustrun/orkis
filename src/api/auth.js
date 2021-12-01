@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const URL_BASE = "http://b740-95-165-9-250.ngrok.io";
+const URL_BASE = "http://kis-project.std-941.ist.mospolytech.ru";
 const requestHeaders = {
   "Access-Control-Allow-Origin": "*",
   Accept: "application/json",
@@ -12,8 +12,6 @@ export const registerUser = (user) =>
     axios
       .post(`${URL_BASE}/register`, user, requestHeaders)
       .then(function (resp) {
-        const token = resp.headers.authorization;
-        localStorage.setItem("token", token);
         resolve(resp);
       })
       .catch(function (err) {
@@ -27,7 +25,7 @@ export const loginUser = (user) =>
     axios
       .post(`${URL_BASE}/login`, user, requestHeaders)
       .then(function (resp) {
-        const token = resp.headers.authorization;
+        const token = resp.data[1]
         localStorage.setItem("token", token);
         resolve(resp);
       })

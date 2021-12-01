@@ -1,7 +1,7 @@
 <template>
   <div class="form-signin">
     <form>
-      <h1 class="h3 mb-3 fw-normal">Зарегистрироваться</h1>
+      <h1 class="h3 mb-3 fw-normal">Добавить пользователя</h1>
 
       <div class="form-floating">
         <input
@@ -109,20 +109,14 @@
         </select>
         <label for="roles">Выберите роль</label>
       </div>
-      <div class="checkbox mb-3">
-        <label>
-          <input v-model="remember" type="checkbox" value="remember-me" />
-          Запомнить меня
-        </label>
-      </div>
       <div v-show="showError" class="mt-2 alert alert-danger" >
         {{ this.errorMessage }}
       </div>
     </form>
     <button class="w-100 btn btn-submit btn-lg btn-primary" @click="sendUser()">
-      Зарегистрироваться
+      Добавить пользователя
     </button>
-    <router-link to="/signin">Войти</router-link>
+    <router-link to="/main">На главную</router-link>
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
       <div class="cssload-ball cssload-ball-2"></div>
@@ -135,7 +129,7 @@
 <script>
 import { registerUser } from "../api/auth.js";
 export default {
-  name: "SignUp",
+  name: "AddUser",
   data() {
     return {
       email: "",
@@ -148,7 +142,6 @@ export default {
       org: "",
       gender: "",
       role: "",
-      remember: false,
       showError: false,
       loading: false,
       errorMessage: "",
@@ -168,18 +161,19 @@ export default {
         password_confirmation: this.password2,
         organisation: +this.org,
         gender: this.gender,
-        role: this.role,
-        remember: this.remember,
+        role: this.role
       })
-        .then(() => {
-          this.$router.push("/main");
+        .then((resp) => {
           this.loading = false;
+          this.$router.push(`/users/${resp.data.id}`);
         })
         .catch((error) => {
-          console.log(error);
+          this.loading = false;
           this.errorMessage = error.response.data.error.errors;
           this.showError = true;
-          this.loading = false;
+          console.log(error);
+          
+          
         });
     },
   },
