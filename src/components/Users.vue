@@ -1,7 +1,8 @@
 <template>
 <div class="container">
     <h1>Сотрудники</h1>
-    <router-link to="/main">На главную</router-link>
+    <router-link to="/main">На главную</router-link><br>
+    <router-link v-if="admin"  to="/add_user">Создать пользователя</router-link>
     <hr>
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
@@ -23,15 +24,25 @@ export default {
    data: function () {
     return {
       users: [],
+      user: {},
       loading: false
     }
   },
   created(){
     this.loading = true;
-getSomething('users').then((resp) => {
+    getSomething('users').then((resp) => {
       this.users = resp.data;
       this.loading = false;
     });
+    getSomething("user").then((response) => {
+      this.user = response.data[0];
+    });
+  },
+    computed: {
+    admin: function () {
+      if (this.user.role === "admin") return true;
+      else return false;
+    },
   },
   methods: {
       userOpen: function(id) {

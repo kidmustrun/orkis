@@ -6,7 +6,7 @@ export const postSomething = (dataName, data) =>
 
     var config = {
       method: "post",
-      url: `${URL_BASE}/${dataName}`,
+      url: `${URL_BASE}${dataName}`,
       data: data,
       headers: {
         Authorization: token,

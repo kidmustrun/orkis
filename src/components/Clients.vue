@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Клиенты</h1>
     <router-link to="/main">На главную</router-link><br>
-    <router-link v-if="admin" to="/add_user">Создать пользователя</router-link>
+    <router-link to="/add_client">Создать клиента</router-link>
     <hr />
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
