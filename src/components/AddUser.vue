@@ -74,10 +74,10 @@
         <label for="password2">Повторите пароль</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="orgs" v-model="org">
-          <option selected value="1">Организация 1</option>
-          <option value="2">Организация 2</option>
-          <option value="3">Организация 3</option>
+        <select class="form-select" id="orgs" v-model="orgs">
+          <option v-for="org in orgs" :value="org.id" :key="org.id">
+            {{ org.name }}, {{ org.address }}
+          </option>
         </select>
         <label for="orgs">Выберите организацию</label>
       </div>
@@ -105,11 +105,14 @@
       </div>
       <div class="form-floating mb-3">
         <select class="form-select" id="roles" v-model="role">
-          <option selected value="agent">Роль 1</option>
-        </select>
+              <option selected value="agent">Агент</option>
+              <option value="manager">Менеджер</option>
+              <option value="accountant">Бухгалтер</option>
+              <option value="admin">Администратор</option>
+            </select>
         <label for="roles">Выберите роль</label>
       </div>
-      <div v-show="showError" class="mt-2 alert alert-danger" >
+      <div v-show="showError" class="mt-2 alert alert-danger">
         {{ this.errorMessage }}
       </div>
     </form>
@@ -128,6 +131,7 @@
 
 <script>
 import { registerUser } from "../api/auth.js";
+import { getSomething } from "../api/get";
 export default {
   name: "AddUser",
   data() {
@@ -145,7 +149,13 @@ export default {
       showError: false,
       loading: false,
       errorMessage: "",
+      orgs: {},
     };
+  },
+  created() {
+    getSomething("organisations").then((response) => {
+      this.orgs = response.data;
+    });
   },
   methods: {
     sendUser() {
@@ -161,7 +171,7 @@ export default {
         password_confirmation: this.password2,
         organisation: +this.org,
         gender: this.gender,
-        role: this.role
+        role: this.role,
       })
         .then((resp) => {
           this.loading = false;
@@ -172,8 +182,6 @@ export default {
           this.errorMessage = error.response.data.error.errors;
           this.showError = true;
           console.log(error);
-          
-          
         });
     },
   },

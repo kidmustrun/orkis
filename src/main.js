@@ -19,7 +19,7 @@ const isAuthenticated = () => {
 };
 var admin;
 
-getSomething("user").then((response) => {
+getSomething("api/v1/user").then((response) => {
   let user;
   user = response.data[0];
 

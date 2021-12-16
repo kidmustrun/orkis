@@ -1,11 +1,13 @@
 const token = localStorage.getItem("token");
-export const getSomething = (dataName) =>
+const URL_BASE = "http://kis-project.std-941.ist.mospolytech.ru/";
+export const putSomething = (dataName, data) =>
   new Promise((resolve, reject) => {
     var axios = require("axios");
 
     var config = {
-      method: "get",
-      url: `http://kis-project.std-941.ist.mospolytech.ru/${dataName}`,
+      method: "put",
+      url: `${URL_BASE}${dataName}`,
+      data: data,
       headers: {
         Authorization: token,
         Accept: "*/*",
@@ -19,7 +21,6 @@ export const getSomething = (dataName) =>
         resolve(response);
       })
       .catch(function (error) {
-        console.log(error);
         reject(error);
       });
   });

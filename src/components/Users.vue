@@ -11,8 +11,8 @@
       <div class="cssload-ball cssload-ball-4"></div>
     </div>
     <ul class="list-group" v-for="user in users" :key="user.id">
-  <li class="list-group-item">Сотрудник {{ user.first_name }} {{ user.last_name }}</li>
-  <router-link :to="userOpen(user.id)">Редактировать</router-link>
+  <li class="list-group-item">Сотрудник {{ user.first_name }} {{ user.last_name }}  <router-link :to="userOpen(user.id)">Просмотр</router-link></li>
+ 
 </ul>
 </div>
 </template>
@@ -30,11 +30,11 @@ export default {
   },
   created(){
     this.loading = true;
-    getSomething('users').then((resp) => {
+    getSomething('api/v1/users').then((resp) => {
       this.users = resp.data;
       this.loading = false;
     });
-    getSomething("user").then((response) => {
+    getSomething("api/v1/user").then((response) => {
       this.user = response.data[0];
     });
   },

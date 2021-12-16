@@ -41,11 +41,11 @@ export default {
   },
   created() {
     this.loading = true;
-    getSomething("clients").then((resp) => {
+    getSomething("api/v1/clients").then((resp) => {
       this.clients = resp.data;
       this.loading = false;
     });
-    getSomething("user").then((response) => {
+    getSomething("api/v1/user").then((response) => {
       this.user = response.data[0];
     });
   },

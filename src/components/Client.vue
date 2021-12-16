@@ -30,7 +30,7 @@ export default {
     };
   },
   created() {
-    getSomething(`clients/${this.$route.params.id}`).then(
+    getSomething(`api/v1/clients/${this.$route.params.id}`).then(
       (resp) => (this.client = resp.data[0])
     );
   },

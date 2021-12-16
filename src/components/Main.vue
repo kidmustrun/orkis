@@ -22,7 +22,7 @@ export default {
     }
   },
   created() {
-    getSomething("user").then((response) => {
+    getSomething("api/v1/user").then((response) => {
       this.user = response.data[0];
     });
   },
