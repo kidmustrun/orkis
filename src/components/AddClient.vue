@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { addClient } from "../api/post.js";
+import { postSomething } from "../api/post.js";
 export default {
   name: "AddClient",
   data() {
@@ -129,7 +129,7 @@ export default {
     sendUser() {
       this.loading = true;
       this.showError = false;
-      addClient({
+      postSomething('api/v1/clients/create',{
         first_name: this.name,
         second_name: this.surname,
         last_name: this.lastname,
@@ -141,7 +141,8 @@ export default {
       })
         .then((resp) => {
           this.loading = false;
-          this.$router.push(`/clients/${resp.data.id}`);
+          console.log(resp)
+          this.$router.push(`/clients/${resp.data.data.id}`);
         })
         .catch((error) => {
           this.loading = false;
