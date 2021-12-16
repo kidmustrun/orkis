@@ -3,6 +3,7 @@ import App from "./App.vue";
 import VueRouter from "vue-router";
 import SignIn from "./components/SignIn";
 import AddUser from "./components/AddUser";
+import AddClient from "./components/AddClient";
 import Users from "./components/Users";
 import User from "./components/User";
 import Clients from "./components/Clients";
@@ -37,6 +38,7 @@ const routes = [
       }
     },
   },
+  { path: "/add_client", component: AddClient },
   {
     path: "/signin",
     component: SignIn,
