@@ -68,7 +68,6 @@ export default {
       this.loading = true;
       this.show400 = false;
       this.show503 = false;
-      console.log(this.loading);
       loginUser({ email: this.email, password: this.password, remember: this.remember })
         .then(() => {
           this.$router.push("/main");

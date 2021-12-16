@@ -141,7 +141,6 @@ export default {
       })
         .then((resp) => {
           this.loading = false;
-          console.log(resp)
           this.$router.push(`/clients/${resp.data.data.id}`);
         })
         .catch((error) => {

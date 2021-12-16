@@ -74,7 +74,7 @@
         <label for="password2">Повторите пароль</label>
       </div>
       <div class="form-floating">
-        <select class="form-select" id="orgs" v-model="orgs">
+        <select class="form-select" id="orgs" v-model="org">
           <option v-for="org in orgs" :value="org.id" :key="org.id">
             {{ org.name }}, {{ org.address }}
           </option>
@@ -105,11 +105,11 @@
       </div>
       <div class="form-floating mb-3">
         <select class="form-select" id="roles" v-model="role">
-              <option selected value="agent">Агент</option>
-              <option value="manager">Менеджер</option>
-              <option value="accountant">Бухгалтер</option>
-              <option value="admin">Администратор</option>
-            </select>
+          <option selected value="agent">Агент</option>
+          <option value="manager">Менеджер</option>
+          <option value="accountant">Бухгалтер</option>
+          <option value="admin">Администратор</option>
+        </select>
         <label for="roles">Выберите роль</label>
       </div>
       <div v-show="showError" class="mt-2 alert alert-danger">
@@ -175,7 +175,7 @@ export default {
       })
         .then((resp) => {
           this.loading = false;
-          this.$router.push(`/users/${resp.data.id}`);
+          this.$router.push(`/users/${resp.data[0]}`);
         })
         .catch((error) => {
           this.loading = false;

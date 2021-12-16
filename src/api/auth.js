@@ -18,10 +18,11 @@ const headers = {
 
 export const registerUser = (user) =>
   new Promise((resolve, reject) => {
-    console.log(`${URL_BASE}/register`, user, requestHeaders);
+    console.log(`${URL_BASE}/register`, user, headers);
     axios
-      .post(`${URL_BASE}/register`, user, requestHeaders)
+      .post(`${URL_BASE}/register`, user, headers)
       .then(function (resp) {
+        localStorage.setItem("token", token);
         resolve(resp);
       })
       .catch(function (err) {
