@@ -225,7 +225,7 @@ export default {
     submitFile() {
       let formData = new FormData();
       formData.append('file', this.file);
-      postFile(`api/v1/user/${this.$route.params.id}/photo`)
+      postFile(`api/v1/user/${this.$route.params.id}/photo`, formData)
     },
   },
 };
