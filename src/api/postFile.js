@@ -1,7 +1,7 @@
 const token = localStorage.getItem("token");
 const URL_BASE = "http://kis-project.std-941.ist.mospolytech.ru/";
 export const postFile = (dataName, data) =>
-  new Promise(() => {
+  new Promise((resolve,reject) => {
     var axios = require("axios");
     var config = {
       method: "post",
@@ -10,16 +10,17 @@ export const postFile = (dataName, data) =>
       headers: {
         Authorization: token,
         Accept: "*/*",
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "application/json",
         "X-Requested-With": "XMLHttpRequest",
       },
     };
 
     axios(config)
-    .then(function(){
-        console.log('SUCCESS!!');
+    .then(function(resp){
+        resolve(resp);
+        location.reload()
       })
-      .catch(function(){
-        console.log('FAILURE!!');
+      .catch(function(error){
+        reject(error);
       });
   });
