@@ -3,6 +3,16 @@
     <h1>Сотрудник с id {{ $route.params.id }}</h1>
     <router-link to="/users">Назад</router-link>
     <hr />
+    <label
+      >File
+      <input
+        type="file"
+        id="file"
+        ref="file"
+        v-on:change="handleFileUpload()"
+      />
+    </label>
+    <button v-on:click="submitFile()">Submit</button>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         {{ user.second_name }} {{ user.first_name }} {{ user.last_name }}
@@ -133,6 +143,7 @@
 import { getSomething } from "../api/get";
 import { putSomething } from "../api/put";
 import { deleteSomething } from "../api/delete";
+import { postFile } from "../api/postFile";
 
 export default {
   name: "User",
@@ -140,6 +151,7 @@ export default {
   data() {
     return {
       user: {},
+      file: "",
       owner: {},
       org: {},
       orgs: {},
@@ -174,7 +186,6 @@ export default {
     });
     getSomething("api/v1/user").then((response) => {
       this.owner = response.data[0];
-      console.log(this.owner);
     });
     getSomething("organisations").then((response) => {
       this.orgs = response.data;
@@ -207,6 +218,14 @@ export default {
         role: this.role,
       });
       this.reload();
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
+    submitFile() {
+      let formData = new FormData();
+      formData.append('file', this.file);
+      postFile(`api/v1/user/${this.$route.params.id}/photo`)
     },
   },
 };
