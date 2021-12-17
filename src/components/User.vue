@@ -14,6 +14,8 @@
           v-on:change="handleFileUpload()"
         />
         <br />
+        <a download="photo.jpg" :href="user.photo">Скачать картинку </a>
+        <br />
         <button class="btn btn-danger" v-on:click="deletePhoto()">
           Удалить фотографию
         </button>
@@ -21,8 +23,8 @@
           Редактировать фотографию
         </button>
         <div v-show="showError" class="mt-2 alert alert-danger">
-        {{ this.errorMessage }}
-      </div>
+          {{ this.errorMessage }}
+        </div>
       </div>
       <ul class="list-group list-group-flush col-sm col-xl-9">
         <li class="list-group-item">
@@ -249,15 +251,16 @@ export default {
           .catch((error) => {
             if (error.response.data.error.code == 22001) {
               this.showError = true;
-              this.errorMessage = 'Превышен допустимый размер изображения. Пожалуйста, выберите изображение с меньшим размером.'
+              this.errorMessage =
+                "Превышен допустимый размер изображения. Пожалуйста, выберите изображение с меньшим размером.";
             }
           });
       };
       reader.readAsDataURL(this.file);
     },
-    deletePhoto(){
-      postFile(`api/v1/user/${this.$route.params.id}/photo/delete`)
-    }
+    deletePhoto() {
+      postFile(`api/v1/user/${this.$route.params.id}/photo/delete`);
+    },
   },
 };
 </script>
