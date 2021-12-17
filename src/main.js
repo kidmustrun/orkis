@@ -38,7 +38,17 @@ const routes = [
       }
     },
   },
-  { path: "/add_client", component: AddClient },
+  {
+    path: "/add_client",
+    component: AddClient,
+    beforeEnter(to, from, next) {
+      if (isAuthenticated()) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
   {
     path: "/signin",
     component: SignIn,

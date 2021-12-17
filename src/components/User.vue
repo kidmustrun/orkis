@@ -6,6 +6,7 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         {{ user.second_name }} {{ user.first_name }} {{ user.last_name }}
+        <i v-if="owner.id == this.$route.params.id">- Это вы</i>
       </li>
       <li class="list-group-item">
         Телефон: {{ user.phone }}, email: {{ user.email }}
@@ -16,7 +17,16 @@
         {{ org.phone }}
       </li>
       <li v-if="admin" class="list-group-item">
-        <button @click="clickEdit">Редактировать пользователя</button>
+        <button
+          v-if="owner.id != this.$route.params.id"
+          class="btn btn-danger mb-2 me-2"
+          @click="deleteUser"
+        >
+          Удалить пользователя
+        </button>
+        <button class="btn btn-primary mb-2" @click="clickEdit">
+          Редактировать пользователя
+        </button>
         <form v-if="clicked">
           <div class="form-floating">
             <input
@@ -107,7 +117,9 @@
             </select>
             <label for="roles">Выберите роль</label>
           </div>
-          <button @click="sendEditUser">Отправить</button>
+          <button class="btn btn-success" @click="sendEditUser">
+            Отправить
+          </button>
           <div v-show="showError" class="mt-2 alert alert-danger">
             {{ this.errorMessage }}
           </div>
@@ -120,9 +132,11 @@
 <script>
 import { getSomething } from "../api/get";
 import { putSomething } from "../api/put";
+import { deleteSomething } from "../api/delete";
+
 export default {
   name: "User",
-  inject:['reload'],
+  inject: ["reload"],
   data() {
     return {
       user: {},
@@ -160,6 +174,7 @@ export default {
     });
     getSomething("api/v1/user").then((response) => {
       this.owner = response.data[0];
+      console.log(this.owner);
     });
     getSomething("organisations").then((response) => {
       this.orgs = response.data;
@@ -174,6 +189,11 @@ export default {
   methods: {
     clickEdit() {
       this.clicked = !this.clicked;
+    },
+    deleteUser() {
+      deleteSomething(`api/v1/users/${this.$route.params.id}/delete`).then(() =>
+        this.$router.push("/users")
+      );
     },
     sendEditUser() {
       putSomething(`api/v1/users/${this.$route.params.id}/update`, {

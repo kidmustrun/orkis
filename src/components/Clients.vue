@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>Клиенты</h1>
-    <router-link to="/main">На главную</router-link><br>
+    <router-link to="/main">На главную</router-link><br />
     <router-link to="/add_client">Создать клиента</router-link>
     <hr />
     <div v-if="loading" class="cssload-spinner">
@@ -13,11 +13,12 @@
 
     <ul class="list-group" v-for="client in clients" :key="client.id">
       <li class="list-group-item">
-        Клиент {{ client.first_name }} {{ client.last_name }}
+        Клиент {{ client.second_name }} {{ client.first_name }}
+        {{ client.last_name
+        }} <keep-alive>
+          <router-link :to="clientOpen(client.id)">Просмотр</router-link>
+        </keep-alive>
       </li>
-      <keep-alive>
-        <router-link :to="clientOpen(client.id)">Редактировать</router-link>
-      </keep-alive>
     </ul>
   </div>
 </template>

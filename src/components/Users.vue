@@ -29,6 +29,7 @@ export default {
     }
   },
   created(){
+    console.log('created')
     this.loading = true;
     getSomething('api/v1/users').then((resp) => {
       this.users = resp.data;
