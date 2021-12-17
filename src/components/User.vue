@@ -16,14 +16,16 @@
         <br />
         <a download="photo.jpg" :href="user.photo">Скачать картинку </a>
         <br />
-        <button class="btn btn-danger" v-on:click="deletePhoto()">
-          Удалить фотографию
-        </button>
-        <button class="btn btn-success" v-on:click="submitFile()">
-          Редактировать фотографию
-        </button>
-        <div v-show="showError" class="mt-2 alert alert-danger">
-          {{ this.errorMessage }}
+        <div v-if="owner.id == this.$route.params.id || admin">
+          <button class="btn btn-danger" v-on:click="deletePhoto()">
+            Удалить фотографию
+          </button>
+          <button class="btn btn-success" v-on:click="submitFile()">
+            Редактировать фотографию
+          </button>
+          <div v-show="showError" class="mt-2 alert alert-danger">
+            {{ this.errorMessage }}
+          </div>
         </div>
       </div>
       <ul class="list-group list-group-flush col-sm col-xl-9">
@@ -40,18 +42,21 @@
           {{ org.phone }}
         </li>
         <li v-if="admin" class="list-group-item">
-          <button
-            v-if="owner.id != this.$route.params.id"
-            class="btn btn-danger mb-2 me-2"
-            @click="deleteUser"
-          >
-            Удалить пользователя
-          </button>
-          <button class="btn btn-primary mb-2" @click="clickEdit">
-            Редактировать пользователя
-          </button>
-        </li>
+        <button class="btn btn-danger mb-2 me-2" @click="deleteUser">
+          Удалить пользователя
+        </button>
+        <button class="btn btn-primary mb-2" @click="clickEdit">
+          Редактировать пользователя
+        </button>
+      </li>
+      <li v-else class="list-group-item">
+        <i
+          >Для изменения учетной записи, пожалуйста, обратитесь к
+          администратору.</i
+        >
+      </li>
       </ul>
+      
     </div>
     <form v-if="clicked">
       <div class="form-floating">
