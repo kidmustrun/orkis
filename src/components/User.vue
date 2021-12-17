@@ -17,10 +17,10 @@
         <a download="photo.jpg" :href="user.photo">Скачать картинку </a>
         <br />
         <div v-if="owner.id == this.$route.params.id || admin">
-          <button class="btn btn-danger" v-on:click="deletePhoto()">
+          <button class="btn btn-accent mt-2" v-on:click="deletePhoto()">
             Удалить фотографию
           </button>
-          <button class="btn btn-success" v-on:click="submitFile()">
+          <button class="btn btn-submit mt-2" v-on:click="submitFile()">
             Редактировать фотографию
           </button>
           <div v-show="showError" class="mt-2 alert alert-danger">
@@ -34,7 +34,7 @@
           <i v-if="owner.id == this.$route.params.id">- Это вы</i>
         </li>
         <li class="list-group-item">
-          Телефон: {{ user.phone }}, email: {{ user.email }}
+         Email: {{ user.email }}
         </li>
         <li class="list-group-item">Роль: {{ user.role }}</li>
         <li class="list-group-item">
@@ -42,7 +42,7 @@
           {{ org.phone }}
         </li>
         <li v-if="admin" class="list-group-item">
-        <button class="btn btn-danger mb-2 me-2" @click="deleteUser">
+        <button class="btn btn-accent mb-2" @click="deleteUser">
           Удалить пользователя
         </button>
         <button class="btn btn-primary mb-2" @click="clickEdit">
@@ -148,7 +148,7 @@
         </select>
         <label for="roles">Выберите роль</label>
       </div>
-      <button class="btn btn-success" @click="sendEditUser">Отправить</button>
+      <button class="btn btn-submit" @click="sendEditUser">Отправить</button>
       <div v-show="showError" class="mt-2 alert alert-danger">
         {{ this.errorMessage }}
       </div>

@@ -13,12 +13,13 @@
       <li class="list-group-item">Статус: {{ client.status }}</li>
       <li class="list-group-item">Пол: {{ client.gender }}</li>
     </ul>
-    <button class="btn btn-danger mb-2 me-2" @click="deleteClient">
+    <button class="btn btn-accent m-2" @click="deleteClient">
       Удалить клиента
     </button>
-    <button @click="clickEdit" class="btn btn-success mb-2">
+    <button @click="clickEdit" class="btn btn-submit m-2">
       Редактировать клиента
     </button>
+    
     <form v-if="clicked" class="p-3 bg-light">
       <div class="form-floating">
         <input
@@ -113,7 +114,7 @@
         <label for="phone">Номер телефона</label>
       </div>
       <button
-        class="btn btn-success"
+        class="btn btn-submit"
         style="margin-bottom: 3%"
         @click="sendEditClient"
       >
@@ -126,7 +127,7 @@
     <hr />
     <div v-if="passportIsset">
       <h4>Паспорт не заполнен</h4>
-      <button @click="clickAddPas" class="btn btn-success m-2">
+      <button @click="clickAddPas" class="btn btn-submit m-2">
         Заполнить данные о паспорте
       </button>
       <form v-if="clickedAddPas" class="p-3 bg-light">
@@ -153,7 +154,7 @@
           <label for="issueDate">Дата выдачи</label>
         </div>
         <button
-          class="btn btn-success"
+          class="btn btn-submit"
           style="margin-bottom: 3%"
           @click="sendPassport"
         >
@@ -175,11 +176,11 @@
           Орган выдавший паспорт: {{ passport.issueOrg }}
         </li>
       </ul>
-      <button @click="delPas" class="btn btn-danger m-2">
+      <button @click="delPas" class="btn btn-accent m-2">
         Удалить данные о паспорте
       </button>
 
-      <button @click="clickEditPas" class="btn btn-success m-2">
+      <button @click="clickEditPas" class="btn btn-submit m-2">
         Редактировать паспорт клиента
       </button>
       <form v-if="clickedPas" class="p-3 bg-light">
@@ -206,7 +207,7 @@
           <label for="issueDate">Дата выдачи</label>
         </div>
         <button
-          class="btn btn-success"
+          class="btn btn-submit"
           style="margin-bottom: 3%"
           @click="sendEditPassport"
         >

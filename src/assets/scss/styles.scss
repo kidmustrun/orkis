@@ -8,3 +8,11 @@
 .btn-submit:hover{
     background-color: $dark-color;
 }
+.btn-accent{
+    background-color: $accent-color;
+    color: #fff;
+    border: none;
+}
+.btn-accent:hover{
+    background-color: $accent-dark-color;
+}
