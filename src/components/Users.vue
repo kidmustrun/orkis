@@ -11,7 +11,7 @@
       <div class="cssload-ball cssload-ball-4"></div>
     </div>
     <ul class="list-group" v-for="user in users" :key="user.id">
-  <li class="list-group-item">Сотрудник {{ user.first_name }} {{ user.last_name }}  <router-link :to="userOpen(user.id)">Просмотр</router-link></li>
+  <li class="list-group-item"><router-link :to="userOpen(user.id)">Сотрудник {{ user.second_name }} {{ user.first_name }} {{ user.last_name }}  </router-link></li>
  
 </ul>
 </div>

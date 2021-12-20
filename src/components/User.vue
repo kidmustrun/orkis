@@ -5,7 +5,7 @@
     <hr />
     <div class="row">
       <div class="col-sm col-xl-3">
-        <img v-if="user.photo" :src="user.photo" />
+        <img v-if="user.photo" :src="user.photo" class="mb-2 rounded" />
         <br />
         <input
           type="file"
@@ -33,30 +33,32 @@
           {{ user.second_name }} {{ user.first_name }} {{ user.last_name }}
           <i v-if="owner.id == this.$route.params.id">- Это вы</i>
         </li>
+        <li class="list-group-item">Email: {{ user.email }}</li>
         <li class="list-group-item">
-         Email: {{ user.email }}
+          Роль: <span v-if="user.role == 'agent'">Агент</span>
+          <span v-if="user.role == 'manager'">Менеджер</span>
+          <span v-if="user.role == 'accountant'">Бухгалтер</span>
+          <span v-if="user.role == 'admin'">Администратор</span>
         </li>
-        <li class="list-group-item">Роль: {{ user.role }}</li>
         <li class="list-group-item">
           Организация: {{ org.name }}, {{ org.address }}, {{ org.email }},
           {{ org.phone }}
         </li>
         <li v-if="admin" class="list-group-item">
-        <button class="btn btn-accent mb-2" @click="deleteUser">
-          Удалить пользователя
-        </button>
-        <button class="btn btn-primary mb-2" @click="clickEdit">
-          Редактировать пользователя
-        </button>
-      </li>
-      <li v-else class="list-group-item">
-        <i
-          >Для изменения учетной записи, пожалуйста, обратитесь к
-          администратору.</i
-        >
-      </li>
+          <button class="btn btn-accent mb-2 me-2" @click="deleteUser">
+            Удалить пользователя
+          </button>
+          <button class="btn btn-submit mb-2" @click="clickEdit">
+            Редактировать пользователя
+          </button>
+        </li>
+        <li v-else class="list-group-item">
+          <i
+            >Для изменения учетной записи, пожалуйста, обратитесь к
+            администратору.</i
+          >
+        </li>
       </ul>
-      
     </div>
     <form v-if="clicked">
       <div class="form-floating">

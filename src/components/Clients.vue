@@ -13,10 +13,10 @@
 
     <ul class="list-group" v-for="client in clients" :key="client.id">
       <li class="list-group-item">
-        Клиент {{ client.second_name }} {{ client.first_name }}
+        <keep-alive>
+          <router-link :to="clientOpen(client.id)">Клиент {{ client.second_name }} {{ client.first_name }}
         {{ client.last_name
-        }} <keep-alive>
-          <router-link :to="clientOpen(client.id)">Просмотр</router-link>
+        }} </router-link>
         </keep-alive>
       </li>
     </ul>

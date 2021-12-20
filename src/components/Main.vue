@@ -24,7 +24,7 @@ export default {
   created() {
     getSomething("api/v1/user").then((response) => {
       this.user = response.data[0];
-    });
+    }).catch(()=> this.$router.push("/signin"));
   },
   methods: {
     logoutClick() {
