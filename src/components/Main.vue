@@ -1,30 +1,37 @@
 <template>
   <div class="container">
     <h1>Главная</h1>
-    <h2>Привет, {{user.first_name}}</h2>
+    <h2>Привет, {{ user.first_name }}</h2>
     <ul class="list-group list-group-flush">
-  <li class="list-group-item"><router-link to="/clients">Клиенты</router-link></li>
-  <li class="list-group-item"><router-link to="/users">Сотрудники</router-link></li>
-</ul>
+      <li class="list-group-item">
+        <router-link to="/clients">Клиенты</router-link>
+      </li>
+      <li class="list-group-item">
+        <router-link to="/users">Сотрудники</router-link>
+      </li>
+    </ul>
     <button @click="logoutClick()" class="btn">Выйти</button>
   </div>
-  
 </template>
 
 <script>
 import { logoutUser } from "../api/auth.js";
-import { getSomething }from "../api/get.js";
+import { getSomething } from "../api/get.js";
 export default {
   name: "Main",
-  data(){
-    return{
-      user: {}
-    }
+  data() {
+    return {
+      user: {},
+    };
   },
   created() {
-    getSomething("api/v1/user").then((response) => {
-      this.user = response.data[0];
-    }).catch(()=> this.$router.push("/signin"));
+    getSomething("api/v1/user")
+      .then((response) => {
+        this.user = response.data[0];
+      })
+      .catch(() => {
+        this.$router.push("/signin");
+      });
   },
   methods: {
     logoutClick() {

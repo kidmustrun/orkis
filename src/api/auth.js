@@ -1,5 +1,5 @@
 const axios = require("axios").default;
-const URL_BASE = "http://kis-project.std-941.ist.mospolytech.ru";
+const URL_BASE = "http://kis-project.std-933.ist.mospolytech.ru";
 const requestHeaders = {
   "Access-Control-Allow-Origin": "*",
   Accept: "application/json",

@@ -5,7 +5,7 @@ export const getSomething = (dataName) =>
 
     var config = {
       method: "get",
-      url: `http://kis-project.std-941.ist.mospolytech.ru/${dataName}`,
+      url: `http://kis-project.std-933.ist.mospolytech.ru/${dataName}`,
       headers: {
         Authorization: token,
         Accept: "*/*",

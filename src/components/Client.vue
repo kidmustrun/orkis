@@ -19,7 +19,7 @@
     <button @click="clickEdit" class="btn btn-submit m-2">
       Редактировать клиента
     </button>
-    
+
     <form v-if="clicked" class="p-3 bg-light">
       <div class="form-floating">
         <input
@@ -158,7 +158,7 @@
           style="margin-bottom: 3%"
           @click="sendPassport"
         >
-          Созранить
+          Сохранить
         </button>
         <div v-show="showError" class="mt-2 alert alert-danger">
           {{ this.errorMessage }}
@@ -287,8 +287,8 @@ export default {
   },
   methods: {
     deleteClient() {
-      deleteSomething(`api/v1/clients/${this.$route.params.id}/delete`).then(() =>
-        this.$router.push("/clients")
+      deleteSomething(`api/v1/clients/${this.$route.params.id}/delete`).then(
+        () => this.$router.push("/clients")
       );
     },
     clickEdit() {
@@ -311,7 +311,7 @@ export default {
         phone: this.phone,
         birth_date: this.birth_date,
       });
-      this.reload();
+      location.reload();
     },
     sendEditPassport() {
       putSomething(`api/v1/clients/update/passport/${this.passport.id}`, {
@@ -319,19 +319,18 @@ export default {
         issueDate: this.issueDate,
         issueOrg: this.issueOrg,
       });
-      this.reload();
+      location.reload();
     },
     sendPassport() {
       postSomething(`api/v1/clients/create/passport/${this.$route.params.id}`, {
         pasId: this.pasId,
         issueDate: this.issueDate,
         issueOrg: this.issueOrg,
-      });
-      this.reload();
+      }).then(() => location.reload());
     },
     delPas() {
       postSomething(`api/v1/clients/delete/passport/${this.passport.id}`, {});
-      this.reload();
+      location.reload();
     },
   },
 };

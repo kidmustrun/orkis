@@ -1,5 +1,5 @@
 const token = localStorage.getItem("token");
-const URL_BASE = "http://kis-project.std-941.ist.mospolytech.ru/";
+const URL_BASE = "http://kis-project.std-933.ist.mospolytech.ru/";
 export const deleteSomething = (dataName) =>
   new Promise((resolve, reject) => {
     var axios = require("axios");
