@@ -9,23 +9,31 @@ import User from "./components/User";
 import Clients from "./components/Clients";
 import Client from "./components/Client";
 import Main from "./components/Main";
+import Cities from "./components/Cities";
+import Countries from "./components/Countries";
+import Preagreements from "./components/Preagreements";
+import Preagreement from "./components/Preagreement";
+import Agreements from "./components/Agreements";
+import Agreement from "./components/Agreement";
+import Hotels from "./components/Hotels";
+import AddPreagreement from "./components/AddPreagreement";
+import AddAgreement from "./components/AddAgreement";
 import { getSomething } from "./api/get";
 
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-const isAuthenticated = () => {
-  if (localStorage.getItem("token")) return true;
-  else false;
-};
 var admin;
+var user;
+var authenticated = true;
+getSomething("api/v1/user")
+  .then(function (response) {
+    user = response.data[0];
+    authenticated = true;
+    if (user.role === "admin") admin = true;
+    else admin = false;
+  })
+  .catch(() => (authenticated = false));
 
-getSomething("api/v1/user").then((response) => {
-  let user;
-  user = response.data[0];
-
-  if (user.role === "admin") admin = true;
-  else admin = false;
-});
 const routes = [
   {
     path: "/add_user",
@@ -42,7 +50,18 @@ const routes = [
     path: "/add_client",
     component: AddClient,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/addagr/:id",
+    component: AddAgreement,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -53,7 +72,7 @@ const routes = [
     path: "/signin",
     component: SignIn,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next("/main");
       } else {
         next();
@@ -61,10 +80,21 @@ const routes = [
     },
   },
   {
+  path: "/addpreagr",
+  component: AddPreagreement,
+  beforeEnter(to, from, next) {
+    if (authenticated) {
+      next();
+    } else {
+      next("/signin");
+    }
+  },
+},
+  {
     path: "/users",
     component: Users,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -75,7 +105,18 @@ const routes = [
     path: "/users/:id",
     component: User,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/preagreements/:id",
+    component: Preagreement,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -86,7 +127,7 @@ const routes = [
     path: "/clients",
     component: Clients,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -97,7 +138,7 @@ const routes = [
     path: "/main",
     component: Main,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -108,7 +149,7 @@ const routes = [
     path: "/clients/:id",
     component: Client,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next();
       } else {
         next("/signin");
@@ -119,10 +160,76 @@ const routes = [
     path: "*",
     component: Main,
     beforeEnter(to, from, next) {
-      if (isAuthenticated()) {
+      if (authenticated) {
         next("/main");
       } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/cities",
+    component: Cities,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
         next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/countries",
+    component: Countries,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/hotels",
+    component: Hotels,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/preagreements",
+    component: Preagreements,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/agreements",
+    component: Agreements,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
+      }
+    },
+  },
+  {
+    path: "/agreements/:id",
+    component: Agreement,
+    beforeEnter(to, from, next) {
+      if (authenticated) {
+        next();
+      } else {
+        next("/signin");
       }
     },
   },

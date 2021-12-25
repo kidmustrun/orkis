@@ -1,9 +1,8 @@
 <template>
 <div class="container">
     <h1>Сотрудники</h1>
-    <router-link to="/main">На главную</router-link><br>
-    <router-link v-if="admin"  to="/add_user">Создать пользователя</router-link>
-    <hr>
+    <div class="menu"><router-link to="/main">На главную</router-link><br>
+    <router-link v-if="admin"  to="/add_user">Создать пользователя</router-link></div>
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
       <div class="cssload-ball cssload-ball-2"></div>
@@ -11,7 +10,9 @@
       <div class="cssload-ball cssload-ball-4"></div>
     </div>
     <ul class="list-group" v-for="user in users" :key="user.id">
-  <li class="list-group-item">Сотрудник {{ user.first_name }} {{ user.last_name }}  <router-link :to="userOpen(user.id)">Просмотр</router-link></li>
+  <li class="list-group-item">{{ user.first_name }} {{ user.last_name }}  
+    <div>
+    <router-link style="color:green" :to="userOpen(user.id)">Просмотр</router-link></div></li>
  
 </ul>
 </div>

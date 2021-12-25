@@ -90,7 +90,7 @@
           value="male"
           v-model="gender"
         />
-        <label class="form-check-label" for="man"> Мужской </label>
+        <label  style="color:white" class="form-check-label" for="man"> Мужской </label>
       </div>
       <div class="form-check form-check-inline mt-2 mb-2">
         <input
@@ -101,7 +101,7 @@
           value="female"
           v-model="gender"
         />
-        <label class="form-check-label" for="woman"> Женский </label>
+        <label  style="color:white" class="form-check-label" for="woman"> Женский </label>
       </div>
       <div class="form-floating mb-3">
         <select class="form-select" id="roles" v-model="role">
@@ -119,7 +119,7 @@
     <button class="w-100 btn btn-submit btn-lg btn-primary" @click="sendUser()">
       Добавить пользователя
     </button>
-    <router-link to="/main">На главную</router-link>
+    <router-link style="color:#87748c; margin-top:1%" to="/main">На главную</router-link>
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
       <div class="cssload-ball cssload-ball-2"></div>

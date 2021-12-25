@@ -1,13 +1,14 @@
 <template>
   <div class="container">
-    <h1>Клиент с id {{ $route.params.id }}</h1>
-    <router-link to="/clients">Назад</router-link>
-    <hr />
+    <h1 style="font-size:30px">Клиент с id {{ $route.params.id }}</h1>
+    <router-link style="text-decoration: none;color:white;font-size: 20px;padding-left: 5px;padding-right: 5px;font-family: 'Jost', sans-serif;font-style: normal;text-align: center; margin-bottom:1%" class="back" to="/clients">Назад</router-link>
+    
+    <div style="background:white; margin-top:2%; padding:2%">
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
-        {{ client.second_name }} {{ client.first_name }} {{ client.last_name }},
-        {{ client.birth_date }}
+        {{ client.second_name }} {{ client.first_name }} {{ client.last_name }}
       </li>
+      <li class="list-group-item">Дата рождения: {{ client.birth_date }}</li>
       <li class="list-group-item">Телефон: {{ client.phone }}</li>
       <li class="list-group-item">Город: {{ client.city }}</li>
       <li class="list-group-item">Статус: {{ client.status }}</li>
@@ -216,6 +217,7 @@
           {{ this.errorMessage }}
         </div>
       </form>
+    </div>
     </div>
   </div>
 </template>

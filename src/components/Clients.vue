@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <h1>Клиенты</h1>
-    <router-link to="/main">На главную</router-link><br />
-    <router-link to="/add_client">Создать клиента</router-link>
-    <hr />
+    <div class="menu"><router-link to="/main">На главную</router-link>
+    <router-link to="/add_client">Создать клиента</router-link></div>
+
     <div v-if="loading" class="cssload-spinner">
       <div class="cssload-ball cssload-ball-1"></div>
       <div class="cssload-ball cssload-ball-2"></div>
@@ -13,11 +13,11 @@
 
     <ul class="list-group" v-for="client in clients" :key="client.id">
       <li class="list-group-item">
-        Клиент {{ client.second_name }} {{ client.first_name }}
+        {{ client.second_name }} {{ client.first_name }}
         {{ client.last_name
-        }} <keep-alive>
-          <router-link :to="clientOpen(client.id)">Просмотр</router-link>
-        </keep-alive>
+        }} <div><keep-alive>
+          <router-link style="color:green" :to="clientOpen(client.id)">Просмотр</router-link>
+        </keep-alive></div>
       </li>
     </ul>
   </div>
@@ -57,7 +57,9 @@ export default {
   },
 };
 </script>
+<style>
 
+</style>
 <style lang="scss" scoped>
 @import "../assets/scss/downloading.scss";
 </style>
