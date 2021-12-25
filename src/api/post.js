@@ -18,9 +18,11 @@ export const postSomething = (dataName, data) =>
 
     axios(config)
       .then(function (response) {
+        console.log(data)
         resolve(response);
       })
       .catch(function (error) {
+        console.log(data)
         reject(error);
       });
   });
